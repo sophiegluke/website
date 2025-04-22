@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>This or That: Provo Edition</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #fcd6bb, #f0d28d);
+      color: #333;
+      text-align: center;
+      padding: 50px 20px;
+    }
+  
+    h1 {
+      color: #E76F51;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+  
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 30px;
+      color: #4E342E;
+    }
+  
+    .choice-btn {
+      background-color: #457B9D;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin: 12px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  
+    .choice-btn:hover {
+      background-color: #2b5a70;
+      transform: translateY(-2px);
+    }
+  
+    .result {
+      margin-top: 50px;
+      font-size: 1.4rem;
+      background-color: #fff8ee;
+      padding: 25px;
+      border-radius: 15px;
+      display: none;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      color: #5d4037;
+    }
+  
+    #questionArea {
+      background-color: #ffffffcc;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>This or That: Provo Edition</h1>
+  <p>Choose your fave — let's see what kind of Provo person you are!</p>
+
+  <div id="questionArea">
+    <button class="choice-btn" id="option1"></button>
+    <button class="choice-btn" id="option2"></button>
+  </div>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    const prompts = [
+      ["Rock Canyon 🏞️", "Utah Lake 🌊"],
+      ["Swig 🥤", "Fiiz 🍹"],
+      ["Waffle Love 🧇", "Station 22 🍗"],
+      ["Downtown Provo 🏙️", "The River Trail 🚲"],
+      ["BYU Campus 📚", "Provo Rec Center 🏋️‍♀️"],
+      ["Trader Joe's 🥑", "Smith’s 🍎"],
+      ["Brunch at Magleby's 🍳", "Dinner at Slab 🍕"],
+      ["Crumbl 🍪", "Smart Cookie 🧁"]
+    ];
+
+    const results = [
+      "You’re a laid-back local — hammock in one hand, Dirty Dr. Pepper in the other.",
+      "You’re a trail-loving foodie — let’s be honest, you run for the cookies.",
+      "You’re a classic Provo all-star — thrift, hike, chill, repeat.",
+      "You’re a creative soul — downtown vibes and mountain skies are your thing."
+    ];
+
+    let choices = [];
+    let currentPair = 0;
+
+    function showNextPair() {
+      if (currentPair >= 5) {
+        finishQuiz();
+        return;
+      }
+
+      const [opt1, opt2] = prompts[Math.floor(Math.random() * prompts.length)];
+      document.getElementById("option1").textContent = opt1;
+      document.getElementById("option2").textContent = opt2;
+
+      document.getElementById("option1").onclick = () => {
+        choices.push(opt1);
+        currentPair++;
+        showNextPair();
+      };
+
+      document.getElementById("option2").onclick = () => {
+        choices.push(opt2);
+        currentPair++;
+        showNextPair();
+      };
+    }
+
+    function finishQuiz() {
+      document.getElementById("questionArea").style.display = "none";
+      const randomResult = results[Math.floor(Math.random() * results.length)];
+      document.getElementById("resultBox").textContent = randomResult;
+      document.getElementById("resultBox").style.display = "block";
+    }
+
+    // Start game
+    showNextPair();
+  </script>
+</body>
+<div style="margin-top: 50px;">
+  <a href="scratch.html" style="
+    background-color: #E76F51;
+    color: rgb(249, 245, 245);
+    padding: 12px 24px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  " onmouseover="this.style.backgroundColor='#d45a41'" onmouseout="this.style.backgroundColor='#E76F51'">
+    ⬅ Back to Scratch Page
+  </a>
+
+  <a href="index.html" style="
+    background-color: #E76F51;
+    color: white;
+    padding: 12px 24px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  " onmouseover="this.style.backgroundColor='#365f77'" onmouseout="this.style.backgroundColor='#457B9D'">
+    🏠 Back to Resume Page
+  </a>
+</div>
+
+</html>
